@@ -2,7 +2,7 @@
   <div id="app">
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/ex1-ex2">ex1･ex2</router-link>
+      <router-link to="/week3-ex1-ex2">Week3/ex1･ex2</router-link>
     </div>
     <router-view />
   </div>

@@ -11,8 +11,8 @@ const routes: Array<RouteConfig> = [
     component: Home,
   },
   {
-    path: '/ex1-ex2',
-    name: 'Ex1Ex2',
+    path: '/week3-ex1-ex2',
+    name: 'Week3Ex1Ex2',
     component: () => import('../views/week3/ex1-ex2.vue'),
   },
 ]
