@@ -23,8 +23,12 @@ Vue.js(@vue/cli 4.5.10)
   - [/views](./src/views)
     - [/week3](./src/views/week3)：3週目の宿題
       - [ex1-ex2.vue](./src/views/week3/ex1-ex2.vue)：宿題1･2のページ
+- [./document](./document)
+  - [week3.md](./document/week3.md)：3週目の宿題のドキュメント
 
 ## 実行方法
+
+配信URL：https://rozelin-dc.github.io/STEP-Homework-Vue-Project
 
 ### 3週目の宿題
 

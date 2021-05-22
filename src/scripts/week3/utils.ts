@@ -28,10 +28,12 @@ export const tokenize = (
 /** 数字読み込み */
 const readNumber = (input: string, idx: number) => {
   let num = 0
+  /** 整数部分読み込み */
   while (idx < input.length && !isNaN(+input[idx])) {
     num = num * 10 + +input[idx]
     idx += 1
   }
+  /** 小数部分読み込み */
   if (input[idx] == '.') {
     let decimal = 0.1
     idx += 1

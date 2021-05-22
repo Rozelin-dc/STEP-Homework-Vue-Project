@@ -26,5 +26,8 @@ export const mainEx2 = () => {
   result = mainEx1('1+2*3-4/5*2')
   if (result !== ans) return 'NG'
 
+  result = mainEx1('1+)')
+  if (result !== 'error') return 'NG'
+
   return 'OK'
 }
