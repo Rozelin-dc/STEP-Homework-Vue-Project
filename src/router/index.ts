@@ -13,7 +13,7 @@ const routes: Array<RouteConfig> = [
   {
     path: '/ex1-ex2',
     name: 'Ex1Ex2',
-    component: () => import('../views/ex1-ex2.vue'),
+    component: () => import('../views/week3/ex1-ex2.vue'),
   },
 ]
 

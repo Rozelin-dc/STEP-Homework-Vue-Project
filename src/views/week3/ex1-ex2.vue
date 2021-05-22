@@ -12,8 +12,8 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
 import ExComponent from '@/components/ex-component.vue'
-import { mainEx1 } from '@/scripts/ex1'
-import { mainEx2 } from '@/scripts/ex2'
+import { mainEx1 } from '@/scripts/week3/ex1'
+import { mainEx2 } from '@/scripts/week3/ex2'
 
 @Component({
   name: 'Ex1Ex2',
