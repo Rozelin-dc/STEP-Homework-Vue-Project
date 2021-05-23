@@ -25,8 +25,8 @@ Vue.js(@vue/cli 4.5.10)
     - [/week3](./src/views/week3)：3週目の宿題
       - [ex1-ex2.vue](./src/views/week3/ex1-ex2.vue)：宿題1･2のページ
       - [ex3.vue](./src/views/week3/ex3.vue)：宿題3のページ
-- [./document](./document)
-  - [week3.md](./document/week3.md)：3週目の宿題のドキュメント
+- [./document](./documents)
+  - [week3.md](./documents/week3.md)：3週目の宿題のドキュメント
 
 ## 実行方法
 
