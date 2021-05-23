@@ -38,3 +38,7 @@
 8. `calculateBracketedFormula)(input')`で、`input'`にかっこは含まれないので、`calculate(input')`が実行され`5`が返される
 9. `calculateBracketedFormula(input)`に戻り、`calculateBracketedFormula(input')`の戻り値`5`を返して終了する
 
+図にすると下のようになる
+
+![img](./week3.png)
+
