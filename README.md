@@ -16,13 +16,15 @@ Vue.js(@vue/cli 4.5.10)
       - [ex-component.vue](./src/components/week3/ex-component.vue)：宿題1~3共通で使うvueコンポーネント
   - [/scripts](./src/scripts)
     - [/week3](./src/scripts/week3)：3週目の宿題
-      - [type.ts](./src/scripts/type.ts)：共通で使う型を定義したファイル
-      - [utils.ts](./src/scripts/utils.ts)：共通で使う関数を定義したファイル
-      - [ex1.ts](./src/scripts/ex1.ts)：宿題1のコード
-      - [ex2.ts](./src/scripts/ex2.ts)：宿題2のコード(宿題1のテスト)
+      - [type.ts](./src/scripts/week3/type.ts)：共通で使う型を定義したファイル
+      - [utils.ts](./src/scripts/week3/utils.ts)：共通で使う関数を定義したファイル
+      - [ex1.ts](./src/scripts/week3/ex1.ts)：宿題1のコード
+      - [ex2.ts](./src/scripts/week3/ex2.ts)：宿題2のコード(宿題1のテスト)
+      - [ex3.ts](./src/scripts/week3/ex3.ts)：宿題3のコード
   - [/views](./src/views)
     - [/week3](./src/views/week3)：3週目の宿題
       - [ex1-ex2.vue](./src/views/week3/ex1-ex2.vue)：宿題1･2のページ
+      - [ex3.vue](./src/views/week3/ex3.vue)：宿題3のページ
 - [./document](./document)
   - [week3.md](./document/week3.md)：3週目の宿題のドキュメント
 
