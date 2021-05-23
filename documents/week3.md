@@ -29,12 +29,12 @@
 入力：`1+(1+(1+1))+1`(=`input`)
 
 1. `calculateBracketedFormula(input)`で`input`が`A=1+`, `B=1+(1+1)`, `C=+1`に分けられ、`calculateBracketedFormula(B)`が実行される
-2. `calculateBracketedFormula(B)`で、`B`が`B1=1+`, `B2=1+1`に分けられ、`calculateBracketedFormula(B2)`が実行される。
-3. `calculateBracketedFormula(B2)`で、`B2`にかっこは含まれないので、`calculate(B2)`が実行され、`2`が返される。
+2. `calculateBracketedFormula(B)`で、`B`が`B1=1+`, `B2=1+1`に分けられ、`calculateBracketedFormula(B2)`が実行される
+3. `calculateBracketedFormula(B2)`で、`B2`にかっこは含まれないので、`calculate(B2)`が実行され、`2`が返される
 4. `calculateBracketedFormula(B)`に戻り、`B1`と`calculateBracketedFormula(B2)`の戻り値`2`をつなげた数式`B'=1+2`を引数に`calculateBracketedFormula(B')`を実行
 5. `calculateBracketedFormula(B')`で、`B'`にかっこは含まれないので、`calculate(B')`が実行され、`3`が返される
 6. `calculateBracketedFormula(B)`に戻り、`calculateBracketedFormula(B')`の戻り値`3`を返す
 7. `calculateBracketedFormula(input)`に戻り、`A`と`calculateBracketedFormula(B)`の戻り値`3`と`C`をつなげた数式`input'=1+3+1`を引数に`calculateBracketedFormula(input')`を実行
-8. `calculateBracketedFormula)(input')`で、`input'`にかっこは含まれないので、`calculate(input')`が実行され`5`が返される。
+8. `calculateBracketedFormula)(input')`で、`input'`にかっこは含まれないので、`calculate(input')`が実行され`5`が返される
 9. `calculateBracketedFormula(input)`に戻り、`calculateBracketedFormula(input')`の戻り値`5`を返して終了する
 
