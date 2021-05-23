@@ -1,6 +1,12 @@
 <template>
   <div class="home">
-    <h1>STEP Homework</h1>
+    <h1>STEP Homework Vue Project</h1>
+    <div>
+      View on
+      <a href="https://github.com/Rozelin-dc/STEP-Homework-Vue-Project"
+        >GitHub</a
+      >
+    </div>
     <div>
       <h2>About Week3</h2>
       <div>

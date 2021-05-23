@@ -32,6 +32,10 @@ export const test = () => {
   result = mainEx3('((1+1)+1)*(3+3)')
   if (result !== ans) return 'NG'
 
+  ans = 5
+  result = mainEx3('1+(1+(1+1))+1')
+  if (result !== ans) return 'NG'
+
   return 'OK'
 }
 
