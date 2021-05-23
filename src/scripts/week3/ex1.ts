@@ -2,7 +2,7 @@ import { Token } from './type'
 import * as utils from './utils'
 
 export const mainEx1 = (input: string) => {
-  const tokens = utils.tokenize(input.trim(), readOperatorExceptParenthesis)
+  const tokens = utils.tokenize(input.trim(), ['+', '-', '*', '/'])
   if (tokens === null) return 'error'
   const ans = calculate(tokens)
   return ans
@@ -48,25 +48,4 @@ const calculateAdditionAndSubtraction = (tokens: Token[]) => {
     }
   }
   return ans
-}
-
-/** +=/* 演算子の読み込み */
-const readOperatorExceptParenthesis = (input: string, idx: number) => {
-  let token: Token | null = null
-  switch (input[idx]) {
-    case '+':
-      token = '+'
-      break
-    case '-':
-      token = '-'
-      break
-    case '*':
-      token = '*'
-      break
-    case '/':
-      token = '/'
-      break
-  }
-  idx += 1
-  return { token, idx }
 }

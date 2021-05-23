@@ -1,13 +1,7 @@
-import { Token } from './type'
+import { Token, Operator } from './type'
 
 /** 入力を Token 型の配列に変換 */
-export const tokenize = (
-  input: string,
-  readOperator: (
-    input: string,
-    idx: number
-  ) => { token: Token | null; idx: number }
-) => {
+export const tokenize = (input: string, validOperators: Operator[]) => {
   const tokens: Token[] = ['+'] // ダミーの + を挿入
   let index = 0
   while (index < input.length) {
@@ -16,7 +10,7 @@ export const tokenize = (
       tokens.push(token)
       index = idx
     } else {
-      const { token, idx } = readOperator(input, index)
+      const { token, idx } = readOperator(input, index, validOperators)
       if (token === null) return null
       tokens.push(token)
       index = idx
@@ -44,5 +38,21 @@ const readNumber = (input: string, idx: number) => {
     }
   }
   const token = num
+  return { token, idx }
+}
+
+/** 演算子の読み込み */
+const readOperator = (
+  input: string,
+  idx: number,
+  validOperators: Operator[]
+) => {
+  if (validOperators.includes(input[idx] as Operator)) {
+    const token = input[idx] as Operator
+    idx += 1
+    return { token, idx }
+  }
+  const token = null
+  idx += 1
   return { token, idx }
 }
