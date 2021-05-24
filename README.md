@@ -4,7 +4,7 @@ TypeScript(Node.js 12.18.0)
 
 Vue.js(@vue/cli 4.5.10)
 
-※WindowsではTypeScriptのコードはコマンドプロンプトからの入力を受け付けられない為、Vue.jsと組み合わせて、ブラウザ上で任意の入力を受け付けられるようにした
+※WindowsではTypeScriptのコードは標準入力を受け付けられない為、Vue.jsと組み合わせて、ブラウザ上で任意の入力を受け付けられるようにした
 
 ## 概要
 
