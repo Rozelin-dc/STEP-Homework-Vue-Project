@@ -18,12 +18,6 @@ export const test = () => {
   result = mainEx3('2*(1+1)/2')
   if (result !== ans) return 'NG'
 
-  result = mainEx3('1+(2+3')
-  if (result !== 'error') return 'NG'
-
-  result = mainEx3('1)+2+3')
-  if (result !== 'error') return 'NG'
-
   ans = 1.4
   result = mainEx3('(3+4*(2-1))/5')
   if (result !== ans) return 'NG'
@@ -35,6 +29,20 @@ export const test = () => {
   ans = 5
   result = mainEx3('1+(1+(1+1))+1')
   if (result !== ans) return 'NG'
+
+  ans = 11.1
+  result = mainEx3('(1.5+2.2)*3')
+  if (result !== ans) return 'NG'
+
+  ans = -11.1
+  result = mainEx3('(1.5+2.2)*(-3)')
+  if (result !== ans) return 'NG'
+
+  result = mainEx3('1+(2+3')
+  if (result !== 'error') return 'NG'
+
+  result = mainEx3('1)+2+3')
+  if (result !== 'error') return 'NG'
 
   return 'OK'
 }

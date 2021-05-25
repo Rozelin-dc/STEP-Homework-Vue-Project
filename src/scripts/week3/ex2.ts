@@ -26,6 +26,14 @@ export const mainEx2 = () => {
   result = mainEx1('1+2*3-4/5*2')
   if (result !== ans) return 'NG'
 
+  ans = 8.1
+  result = mainEx1('1.5+2.2*3')
+  if (result !== ans) return 'NG'
+
+  ans = 5.1
+  result = mainEx1('-1.5+2.2*3')
+  if (result !== ans) return 'NG'
+
   result = mainEx1('1+)')
   if (result !== 'error') return 'NG'
 
