@@ -4,8 +4,8 @@
     <div>{{ validInputExplanation }}</div>
     <input v-model="input" />
     <br />
-    <button @click="result = calculate(input.trim())">計算</button>
-    <button @click="result = test()">テスト</button>
+    <button @click="doCalculate">計算</button>
+    <button @click="doTest">テスト</button>
     <div>結果: {{ result }}</div>
   </div>
 </template>
@@ -26,5 +26,13 @@ export default class extends Vue {
 
   input = ''
   result: string | number = ''
+
+  doCalculate() {
+    this.result = this.calculate(this.input.replaceAll(' ', ''))
+  }
+
+  doTest() {
+    this.result = this.test()
+  }
 }
 </script>

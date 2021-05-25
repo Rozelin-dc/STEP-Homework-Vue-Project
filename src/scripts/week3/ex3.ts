@@ -57,7 +57,7 @@ const calculateBracketedFormula = (tokens: Token[]): number | 'error' => {
     }
     // () の内側を計算済みのものに置き換えて数式を再構築し、再度計算
     const partialTokens = tokens.slice(beginIdx + 1, idx)
-    partialTokens.unshift('+')
+    if (partialTokens[0] !== '-') partialTokens.unshift('+')
     const partialAns = calculateBracketedFormula(partialTokens)
     if (partialAns === 'error') return 'error'
     let newTokens = tokens.slice(0, beginIdx)

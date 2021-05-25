@@ -2,7 +2,7 @@ import { Token, Operator } from './type'
 
 /** 入力を Token 型の配列に変換 */
 export const tokenize = (input: string, validOperators: Operator[]) => {
-  const tokens: Token[] = ['+'] // ダミーの + を挿入
+  const tokens: Token[] = []
   let index = 0
   while (index < input.length) {
     if (!isNaN(+input[index])) {
@@ -16,6 +16,9 @@ export const tokenize = (input: string, validOperators: Operator[]) => {
       index = idx
     }
   }
+
+  if (tokens[0] !== '-') tokens.unshift('+') // ダミーの + を挿入
+
   return tokens
 }
 
