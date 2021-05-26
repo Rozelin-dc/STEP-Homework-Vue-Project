@@ -2,10 +2,10 @@
   <div>
     <h2>{{ title }}</h2>
     <div>{{ validInputExplanation }}</div>
-    <input v-model="input" />
+    <input v-model.trim="input" />
     <br />
-    <button @click="doCalculate">計算</button>
-    <button @click="doTest">テスト</button>
+    <button class="button" @click="doCalculate">計算</button>
+    <button class="button" @click="doTest">テスト</button>
     <div>結果: {{ result }}</div>
   </div>
 </template>
@@ -37,3 +37,9 @@ export default class extends Vue {
   }
 }
 </script>
+
+<style scoped>
+.button {
+  margin: 5px;
+}
+</style>
