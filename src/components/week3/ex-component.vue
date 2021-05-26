@@ -12,6 +12,7 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
+import { Big } from 'big.js'
 
 @Component({
   name: 'ExComponent',
@@ -21,11 +22,11 @@ export default class extends Vue {
   @Prop({ required: true, type: String }) validInputExplanation!: string
   @Prop({ required: true, type: Function }) calculate!: (
     input: string
-  ) => number | 'error'
+  ) => Big | 'error'
   @Prop({ required: true, type: Function }) test!: () => 'OK' | 'NG'
 
   input = ''
-  result: string | number = ''
+  result: string | Big = ''
 
   doCalculate() {
     this.result = this.calculate(this.input.replaceAll(' ', ''))

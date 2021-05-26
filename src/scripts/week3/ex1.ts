@@ -1,3 +1,4 @@
+import { Big } from 'big.js'
 import { Token } from './type'
 import * as utils from './utils'
 
@@ -25,12 +26,12 @@ const calculateMultiplicationAndDivision = (tokens: Token[]) => {
       continue
     }
     if (tokens[i] === '*') {
-      const newTokenValue = +newTokens[newTokens.length - 1]
-      newTokens[newTokens.length - 1] = newTokenValue * +tokens[i + 1]
+      const newTokenValue = newTokens[newTokens.length - 1] as Big
+      newTokens[newTokens.length - 1] = newTokenValue.times(+tokens[i + 1])
     }
     if (tokens[i] === '/') {
-      const newTokenValue = +newTokens[newTokens.length - 1]
-      newTokens[newTokens.length - 1] = newTokenValue / +tokens[i + 1]
+      const newTokenValue = newTokens[newTokens.length - 1] as Big
+      newTokens[newTokens.length - 1] = newTokenValue.div(+tokens[i + 1])
     }
   }
   return newTokens
@@ -38,13 +39,13 @@ const calculateMultiplicationAndDivision = (tokens: Token[]) => {
 
 /** 足し算と引き算のみの式を計算する */
 const calculateAdditionAndSubtraction = (tokens: Token[]) => {
-  let ans = 0
+  let ans = new Big(0)
   for (let i = 0; i < tokens.length; i += 2) {
     if (tokens[i] === '+') {
-      ans += +tokens[i + 1]
+      ans = ans.plus(+tokens[i + 1])
     }
     if (tokens[i] === '-') {
-      ans -= +tokens[i + 1]
+      ans = ans.minus(+tokens[i + 1])
     }
   }
   return ans

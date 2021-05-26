@@ -1,6 +1,7 @@
 import { Token } from './type'
 import * as utils from './utils'
 import { calculate } from './ex1'
+import { Big } from 'big.js'
 
 export const mainEx3 = (input: string) => {
   const tokens = utils.tokenize(input, ['+', '-', '*', '/', '(', ')'])
@@ -12,31 +13,31 @@ export const mainEx3 = (input: string) => {
 export const test = () => {
   let ans = 2
   let result = mainEx3('(1+1)')
-  if (result !== ans) return 'NG'
+  if (result === 'error' || !result.eq(ans)) return 'NG'
 
   ans = 2
   result = mainEx3('2*(1+1)/2')
-  if (result !== ans) return 'NG'
+  if (result === 'error' || !result.eq(ans)) return 'NG'
 
   ans = 1.4
   result = mainEx3('(3+4*(2-1))/5')
-  if (result !== ans) return 'NG'
+  if (result === 'error' || !result.eq(ans)) return 'NG'
 
   ans = 18
   result = mainEx3('((1+1)+1)*(3+3)')
-  if (result !== ans) return 'NG'
+  if (result === 'error' || !result.eq(ans)) return 'NG'
 
   ans = 5
   result = mainEx3('1+(1+(1+1))+1')
-  if (result !== ans) return 'NG'
+  if (result === 'error' || !result.eq(ans)) return 'NG'
 
   ans = 11.1
   result = mainEx3('(1.5+2.2)*3')
-  if (result !== ans) return 'NG'
+  if (result === 'error' || !result.eq(ans)) return 'NG'
 
   ans = -11.1
   result = mainEx3('(1.5+2.2)*(-3)')
-  if (result !== ans) return 'NG'
+  if (result === 'error' || !result.eq(ans)) return 'NG'
 
   result = mainEx3('1+(2+3')
   if (result !== 'error') return 'NG'
@@ -48,7 +49,7 @@ export const test = () => {
 }
 
 /** () を含む数式を計算 */
-const calculateBracketedFormula = (tokens: Token[]): number | 'error' => {
+const calculateBracketedFormula = (tokens: Token[]): Big | 'error' => {
   // かっこが対になっていなかったらエラー
   if (tokens.includes('(') && !tokens.includes(')')) return 'error'
   if (!tokens.includes('(') && tokens.includes(')')) return 'error'

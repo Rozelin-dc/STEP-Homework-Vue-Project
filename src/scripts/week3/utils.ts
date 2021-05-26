@@ -1,3 +1,4 @@
+import { Big } from 'big.js'
 import { Token, Operator } from './type'
 
 /** 入力を Token 型の配列に変換 */
@@ -24,19 +25,20 @@ export const tokenize = (input: string, validOperators: Operator[]) => {
 
 /** 数字読み込み */
 const readNumber = (input: string, idx: number) => {
-  let num = 0
+  let num = new Big(0)
   /** 整数部分読み込み */
   while (idx < input.length && !isNaN(+input[idx])) {
-    num = num * 10 + +input[idx]
+    num = num.times(10).plus(+input[idx])
     idx += 1
   }
   /** 小数部分読み込み */
   if (input[idx] == '.') {
-    let decimal = 0.1
+    let decimal = new Big(0.1)
     idx += 1
+    num = new Big(num)
     while (idx < input.length && !isNaN(+input[idx])) {
-      num += +input[idx] * decimal
-      decimal /= 10
+      num = decimal.times(+input[idx]).plus(num)
+      decimal = decimal.div(10)
       idx += 1
     }
   }
