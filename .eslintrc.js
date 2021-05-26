@@ -9,8 +9,10 @@ module.exports = {
     '@vue/typescript',
   ],
   parserOptions: {
-    ecmaVersion: 12,
     parser: '@typescript-eslint/parser',
+    ecmaFeatures: {
+      jsx: false
+    }
   },
   plugins: ['vue', '@typescript-eslint'],
   rules: {
