@@ -36,22 +36,22 @@ Vue.js(@vue/cli 4.5.10)
 
 各ページの入力欄に数式を入力し、「計算」を押すと計算結果が表示される。「テスト」を押すと、入力に関係なくテストが実行され、その結果が表示される。入力可能な文字は各入力欄の上に書いてあるとおり
 
-### Project setup
+### 必要なパッケージのインストール
 ```
 npm install
 ```
 
-### Compiles and hot-reloads for development
+### 開発用ホットリロード環境立ち上げ
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### ビルド
 ```
 npm run build
 ```
 
-### Lints and fixes files
+### コード整形
 ```
 npm run lint
 ```
