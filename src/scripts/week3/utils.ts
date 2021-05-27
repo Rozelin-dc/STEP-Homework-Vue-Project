@@ -13,6 +13,14 @@ export const tokenize = (input: string, validOperators: Operator[]) => {
     } else {
       const { token, idx } = readOperator(input, index, validOperators)
       if (token === null) return null
+      if (
+        isNaN(+tokens[tokens.length - 1]) &&
+        tokens[tokens.length - 1] !== '(' &&
+        tokens[tokens.length - 1] !== ')' &&
+        token !== '(' &&
+        token !== ')'
+      )
+        return null
       tokens.push(token)
       index = idx
     }
@@ -35,7 +43,6 @@ const readNumber = (input: string, idx: number) => {
   if (input[idx] == '.') {
     let decimal = new Big(0.1)
     idx += 1
-    num = new Big(num)
     while (idx < input.length && !isNaN(+input[idx])) {
       num = decimal.times(+input[idx]).plus(num)
       decimal = decimal.div(10)
