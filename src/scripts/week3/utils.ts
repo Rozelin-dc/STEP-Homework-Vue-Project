@@ -13,14 +13,19 @@ export const tokenize = (input: string, validOperators: Operator[]) => {
     } else {
       const { token, idx } = readOperator(input, index, validOperators)
       if (token === null) return null
-      // () 以外の演算子が連続していたらエラー
+      // 演算子が不正に連続していたらエラー
       if (
         tokens.length > 0 &&
-        isNaN(+tokens[tokens.length - 1]) &&
-        tokens[tokens.length - 1] !== '(' &&
-        tokens[tokens.length - 1] !== ')' &&
-        token !== '(' &&
-        token !== ')'
+        ((tokens[tokens.length - 1] === '(' &&
+          !(token === '-' || token === '(')) ||
+          (isNaN(+tokens[tokens.length - 1]) &&
+            tokens[tokens.length - 1] !== ')' &&
+            token === ')') ||
+          ((tokens[tokens.length - 1] === '+' ||
+            tokens[tokens.length - 1] === '-' ||
+            tokens[tokens.length - 1] === '*' ||
+            tokens[tokens.length - 1] === '/') &&
+            (token === '+' || token === '-' || token === '*' || token === '/')))
       )
         return null
       tokens.push(token)

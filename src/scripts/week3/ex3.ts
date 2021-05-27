@@ -47,6 +47,10 @@ export const testEx3 = () => {
   result = mainEx3('2(3-1+2)2')
   if (result === 'error' || !result.eq(ans)) return 'NG'
 
+  ans = -0.2
+  result = mainEx3('1+(-(0.1+1.1))')
+  if (result === 'error' || !result.eq(ans)) return 'NG'
+
   result = mainEx3('1+(2+3')
   if (result !== 'error') return 'NG'
 
@@ -57,6 +61,9 @@ export const testEx3 = () => {
   if (result !== 'error') return 'NG'
 
   result = mainEx3('()*2+1')
+  if (result !== 'error') return 'NG'
+
+  result = mainEx3('(1+1*)2')
   if (result !== 'error') return 'NG'
 
   return 'OK'
