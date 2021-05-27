@@ -12,6 +12,7 @@ export const mainEx1 = (input: string) => {
 /** () が無い式の計算 */
 export const calculate = (tokens: Token[]) => {
   const newTokens = calculateMultiplicationAndDivision(tokens)
+  if (newTokens === null) return 'error'
   const ans = calculateAdditionAndSubtraction(newTokens)
   return ans
 }
@@ -30,6 +31,7 @@ const calculateMultiplicationAndDivision = (tokens: Token[]) => {
       newTokens[newTokens.length - 1] = newTokenValue.times(+tokens[i + 1])
     }
     if (tokens[i] === '/') {
+      if (+tokens[i + 1] === 0) return null // 0 で割る割り算はエラー
       const newTokenValue = newTokens[newTokens.length - 1] as Big
       newTokens[newTokens.length - 1] = newTokenValue.div(+tokens[i + 1])
     }

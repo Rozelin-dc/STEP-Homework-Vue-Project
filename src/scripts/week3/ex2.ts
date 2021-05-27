@@ -47,5 +47,8 @@ export const mainEx2 = () => {
   result = mainEx1('1..0+1.2')
   if (result !== 'error') return 'NG'
 
+  result = mainEx1('4/0')
+  if (result !== 'error') return 'NG'
+
   return 'OK'
 }
