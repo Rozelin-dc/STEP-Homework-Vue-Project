@@ -97,7 +97,8 @@ const calculateBracketedFormula = (tokens: Token[]): Big | 'error' => {
     if (partialAns === 'error') return 'error'
 
     let newTokens = tokens.slice(0, beginIdx)
-    if (!isNaN(+newTokens[newTokens.length - 1])) newTokens.push('*') // * が省略されていたら挿入
+    if (newTokens.length > 0 && !isNaN(+newTokens[newTokens.length - 1]))
+      newTokens.push('*') // * が省略されていたら挿入
     newTokens.push(partialAns)
 
     const backPartialTokens = tokens.slice(idx + 1)
