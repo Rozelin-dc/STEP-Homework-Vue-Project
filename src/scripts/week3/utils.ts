@@ -14,20 +14,30 @@ export const tokenize = (input: string, validOperators: Operator[]) => {
       const { token, idx } = readOperator(input, index, validOperators)
       if (token === null) return null
       // 演算子が不正に連続していたらエラー
-      if (
-        tokens.length > 0 &&
-        ((tokens[tokens.length - 1] === '(' &&
-          !(token === '-' || token === '(')) ||
-          (isNaN(+tokens[tokens.length - 1]) &&
-            tokens[tokens.length - 1] !== ')' &&
-            token === ')') ||
-          ((tokens[tokens.length - 1] === '+' ||
+      if (tokens.length > 0) {
+        if (
+          tokens[tokens.length - 1] === '(' &&
+          !(token === '-' || token === '(')
+        )
+          return null
+
+        if (
+          isNaN(+tokens[tokens.length - 1]) &&
+          tokens[tokens.length - 1] !== ')' &&
+          token === ')'
+        )
+          return null
+
+        if (
+          (tokens[tokens.length - 1] === '+' ||
             tokens[tokens.length - 1] === '-' ||
             tokens[tokens.length - 1] === '*' ||
             tokens[tokens.length - 1] === '/') &&
-            (token === '+' || token === '-' || token === '*' || token === '/')))
-      )
-        return null
+          (token === '+' || token === '-' || token === '*' || token === '/')
+        )
+          return null
+      }
+
       tokens.push(token)
       index = idx
     }
