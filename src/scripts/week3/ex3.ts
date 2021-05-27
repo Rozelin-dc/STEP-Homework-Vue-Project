@@ -45,6 +45,9 @@ export const test = () => {
   result = mainEx3('1)+2+3')
   if (result !== 'error') return 'NG'
 
+  result = mainEx3('(((3))')
+  if (result !== 'error') return 'NG'
+
   return 'OK'
 }
 
