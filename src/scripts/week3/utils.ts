@@ -13,7 +13,9 @@ export const tokenize = (input: string, validOperators: Operator[]) => {
     } else {
       const { token, idx } = readOperator(input, index, validOperators)
       if (token === null) return null
+      // () 以外の演算子が連続していたらエラー
       if (
+        tokens.length > 0 &&
         isNaN(+tokens[tokens.length - 1]) &&
         tokens[tokens.length - 1] !== '(' &&
         tokens[tokens.length - 1] !== ')' &&
@@ -25,6 +27,10 @@ export const tokenize = (input: string, validOperators: Operator[]) => {
       index = idx
     }
   }
+
+  // 数字か ) で式が終わっていなかったらエラー
+  if (isNaN(+tokens[tokens.length - 1]) && tokens[tokens.length - 1] !== ')')
+    return null
 
   if (tokens[0] !== '-') tokens.unshift('+') // ダミーの + を挿入
 
