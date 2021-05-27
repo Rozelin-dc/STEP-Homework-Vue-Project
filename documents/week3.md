@@ -1,6 +1,6 @@
 ## 共通部分
 
-宿題1~3にまたがって使う型と関数はそれぞれ[../src/scripts/week3/type.ts](../src/scripts/week3/type.ts)と[../src/scripts/week3/utils.ts](../src/scripts/week3/utils.ts)に定義した。型`Operator`は演算子として有効な文字、型`Token`は数式中の値として有効な数字と演算子を指す。
+宿題1~3にまたがって使う型と関数はそれぞれ[../src/scripts/week3/type.ts](../src/scripts/week3/type.ts)と[../src/scripts/week3/utils.ts](../src/scripts/week3/utils.ts)に定義した。型`Operator`は演算子として有効な文字、型`Token`は数式中の値として有効な数字と演算子を指す。入力や結果が小数になる可能性があるため、通常の数値型である`Number`型ではなく、小数計算を厳密に行える`Big`型を利用した。
 
 関数`tokenize`は、入力された文字列を数式として解釈し、`Token`型の配列を返す。もし、演算子として無効な文字が含まれていた場合は`null`を返す。演算子として有効な値は引数`validOperators`で与えられる。関数`readNumber`は文字列`input`と数字`idx`を引数として受け取り、`input[idx]`から始まる数字を小数点以下も含めて読み込み、読み込んだ数字と`idx`を返す。関数`readOperator`は文字列`input`と数字`idx`と演算子として有効な値`validOperators`を引数として受け取り、`input[idx]`が`validOperators`に含まれていればその値と`idx`を、含まれてなければ(`input[idx]`が演算子として無効な値だったら)`null`と`idx`を返す。
 
