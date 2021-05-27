@@ -59,11 +59,15 @@ const calculateBracketedFormula = (tokens: Token[]): Big | 'error' => {
     const beginIdx = tokens.indexOf('(')
     let idx = beginIdx + 1
     // 対になるかっこを探す
-    while (count !== 0 || tokens[idx] !== ')') {
+    while ((count !== 0 || tokens[idx] !== ')') && idx < tokens.length) {
       if (tokens[idx] === '(') count += 1
       if (tokens[idx] === ')') count -= 1
       idx += 1
     }
+
+    // ( と ) の数が合わなかったらエラー
+    if (idx >= tokens.length) return 'error'
+
     // () の内側を計算済みのものに置き換えて数式を再構築し、再度計算
     const partialTokens = tokens.slice(beginIdx + 1, idx)
     if (partialTokens[0] !== '-') partialTokens.unshift('+')
