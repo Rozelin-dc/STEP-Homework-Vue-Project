@@ -39,6 +39,10 @@ export const test = () => {
   result = mainEx3('(1.5+2.2)*(-3)')
   if (result === 'error' || !result.eq(ans)) return 'NG'
 
+  ans = 16
+  result = mainEx3('2(3+5)')
+  if (result === 'error' || !result.eq(ans)) return 'NG'
+
   result = mainEx3('1+(2+3')
   if (result !== 'error') return 'NG'
 
@@ -73,12 +77,16 @@ const calculateBracketedFormula = (tokens: Token[]): Big | 'error' => {
 
     // () の内側を計算済みのものに置き換えて数式を再構築し、再度計算
     const partialTokens = tokens.slice(beginIdx + 1, idx)
-    if (partialTokens[0] !== '-') partialTokens.unshift('+')
+    if (partialTokens[0] !== '-') partialTokens.unshift('+') // ダミーの + を挿入
     const partialAns = calculateBracketedFormula(partialTokens)
     if (partialAns === 'error') return 'error'
     let newTokens = tokens.slice(0, beginIdx)
+    if (!isNaN(+newTokens[newTokens.length - 1])) newTokens.push('*') // * が省略されていたら挿入
     newTokens.push(partialAns)
-    newTokens = newTokens.concat(tokens.slice(idx + 1))
+    const backPartialTokens = tokens.slice(idx + 1)
+    if (backPartialTokens.length > 0 && !isNaN(+backPartialTokens[0]))
+      backPartialTokens.unshift('*') // * が省略されていたら挿入
+    newTokens = newTokens.concat(backPartialTokens)
     return calculateBracketedFormula(newTokens)
   }
   // () が無ければ普通に計算
