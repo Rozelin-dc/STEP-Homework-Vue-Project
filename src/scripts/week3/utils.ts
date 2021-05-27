@@ -8,6 +8,7 @@ export const tokenize = (input: string, validOperators: Operator[]) => {
   while (index < input.length) {
     if (!isNaN(+input[index])) {
       const { token, idx } = readNumber(input, index)
+      if (token === null) return null
       tokens.push(token)
       index = idx
     } else {
@@ -57,6 +58,15 @@ const readNumber = (input: string, idx: number) => {
   let num = new Big(0)
   /** 整数部分読み込み */
   while (idx < input.length && !isNaN(+input[idx])) {
+    // 1 未満の数以外で 0 から始まっていたらエラー
+    if (
+      +input[idx] === 0 &&
+      idx + 1 < input.length &&
+      !isNaN(+input[idx + 1])
+    ) {
+      const token = null
+      return { token, idx }
+    }
     num = num.times(10).plus(+input[idx])
     idx += 1
   }
@@ -64,6 +74,11 @@ const readNumber = (input: string, idx: number) => {
   if (input[idx] == '.') {
     let decimal = new Big(0.1)
     idx += 1
+    // 小数点以下に数字が無かったらエラー
+    if (idx >= input.length || isNaN(+input[idx])) {
+      const token = null
+      return { token, idx }
+    }
     while (idx < input.length && !isNaN(+input[idx])) {
       num = decimal.times(+input[idx]).plus(num)
       decimal = decimal.div(10)
