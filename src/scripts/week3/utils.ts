@@ -55,18 +55,14 @@ export const tokenize = (input: string, validOperators: Operator[]) => {
 
 /** 数字読み込み */
 const readNumber = (input: string, idx: number) => {
+  // 1 未満の数以外で 0 から始まっていたらエラー
+  if (+input[idx] === 0 && idx + 1 < input.length && !isNaN(+input[idx + 1])) {
+    const token = null
+    return { token, idx }
+  }
   let num = new Big(0)
   /** 整数部分読み込み */
   while (idx < input.length && !isNaN(+input[idx])) {
-    // 1 未満の数以外で 0 から始まっていたらエラー
-    if (
-      +input[idx] === 0 &&
-      idx + 1 < input.length &&
-      !isNaN(+input[idx + 1])
-    ) {
-      const token = null
-      return { token, idx }
-    }
     num = num.times(10).plus(+input[idx])
     idx += 1
   }
