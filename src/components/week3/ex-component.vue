@@ -29,7 +29,9 @@ export default class extends Vue {
   result: string | Big = ''
 
   doCalculate() {
-    this.result = this.calculate(this.input.replaceAll(' ', ''))
+    this.result = this.calculate(
+      this.input.replaceAll(' ', '').replaceAll('　', '')
+    )
   }
 
   doTest() {

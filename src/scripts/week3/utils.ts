@@ -8,15 +8,45 @@ export const tokenize = (input: string, validOperators: Operator[]) => {
   while (index < input.length) {
     if (!isNaN(+input[index])) {
       const { token, idx } = readNumber(input, index)
+      if (token === null) return null
       tokens.push(token)
       index = idx
     } else {
       const { token, idx } = readOperator(input, index, validOperators)
       if (token === null) return null
+      // 演算子が不正に連続していたらエラー
+      if (tokens.length > 0) {
+        if (
+          tokens[tokens.length - 1] === '(' &&
+          !(token === '-' || token === '(')
+        )
+          return null
+
+        if (
+          isNaN(+tokens[tokens.length - 1]) &&
+          tokens[tokens.length - 1] !== ')' &&
+          token === ')'
+        )
+          return null
+
+        if (
+          (tokens[tokens.length - 1] === '+' ||
+            tokens[tokens.length - 1] === '-' ||
+            tokens[tokens.length - 1] === '*' ||
+            tokens[tokens.length - 1] === '/') &&
+          (token === '+' || token === '-' || token === '*' || token === '/')
+        )
+          return null
+      }
+
       tokens.push(token)
       index = idx
     }
   }
+
+  // 数字か ) で式が終わっていなかったらエラー
+  if (isNaN(+tokens[tokens.length - 1]) && tokens[tokens.length - 1] !== ')')
+    return null
 
   if (tokens[0] !== '-') tokens.unshift('+') // ダミーの + を挿入
 
@@ -25,6 +55,11 @@ export const tokenize = (input: string, validOperators: Operator[]) => {
 
 /** 数字読み込み */
 const readNumber = (input: string, idx: number) => {
+  // 1 未満の数以外で 0 から始まっていたらエラー
+  if (+input[idx] === 0 && idx + 1 < input.length && !isNaN(+input[idx + 1])) {
+    const token = null
+    return { token, idx }
+  }
   let num = new Big(0)
   /** 整数部分読み込み */
   while (idx < input.length && !isNaN(+input[idx])) {
@@ -35,7 +70,11 @@ const readNumber = (input: string, idx: number) => {
   if (input[idx] == '.') {
     let decimal = new Big(0.1)
     idx += 1
-    num = new Big(num)
+    // 小数点以下に数字が無かったらエラー
+    if (idx >= input.length || isNaN(+input[idx])) {
+      const token = null
+      return { token, idx }
+    }
     while (idx < input.length && !isNaN(+input[idx])) {
       num = decimal.times(+input[idx]).plus(num)
       decimal = decimal.div(10)
