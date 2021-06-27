@@ -7,7 +7,7 @@ on:
 
 jobs:
   build-deploy:
-    timeout-minutes: 10
+    timeout-minutes: 5
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -18,17 +18,11 @@ jobs:
         with:
           node-version: '14.x'
 
-      - name: Get yarn cache directory path
-        id: npm-cache-dir-path
-        run: echo "::set-output name=dir::$(npm cache dir)"
-
       - uses: actions/cache@v1
         id: npm-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
         with:
-          path: ${{ steps.npm-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-npm-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-npm-
+          path: ./node_modules
+          key: node_modules-${{ hashFiles('**/package-lock.json') }}
 
       - name: Setup
         run: npm install

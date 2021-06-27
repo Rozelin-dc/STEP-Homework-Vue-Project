@@ -10,7 +10,7 @@ on:
 
 jobs:
   packages:
-    timeout-minutes: 10
+    timeout-minutes: 5
     name: Packages
     runs-on: ubuntu-latest
     steps:
@@ -27,7 +27,7 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
   build:
-    timeout-minutes: 10
+    timeout-minutes: 5
     name: Build
     runs-on: ubuntu-latest
     needs: [packages]
@@ -47,11 +47,11 @@ jobs:
         if: steps.cache.outputs.cache-hit != 'true'
         run: npm ci
       - name: run build
-        run: npm run build:prod
+        run: npm run build
         env:
           NODE_ENV: production
   lint:
-    timeout-minutes: 10
+    timeout-minutes: 5
     name: Lint
     runs-on: ubuntu-latest
     needs: [packages]
@@ -73,7 +73,7 @@ jobs:
       - name: run lint
         run: npm run lint -- --no-fix
   typeCheck:
-    timeout-minutes: 10
+    timeout-minutes: 5
     name: Type Check
     runs-on: ubuntu-latest
     needs: [packages]
@@ -94,25 +94,3 @@ jobs:
         run: npm ci
       - name: run type-check
         run: npm run type-check
-  test:
-    timeout-minutes: 10
-    name: run test
-    runs-on: ubuntu-latest
-    needs: [packages]
-    steps:
-      - uses: actions/setup-node@v1
-        with:
-          node-version: 14.x
-      - uses: actions/checkout@v2
-      - uses: actions/cache@v1
-        id: cache
-        with:
-          path: ./node_modules
-          key: node_modules-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            node_modules-
-      - name: npm ci
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: npm ci
-      - name: run test
-        run: npm run test:unit
